@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Alert, StyleSheet, View } from "react-native";
-
+import { useSignup } from "../../hooks/useSignup";
 import FlatButton from "../ui/FlatButton";
 import AuthForm from "./AuthForm";
 import { Colors } from "../../constants/styles";
 import { useNavigation } from "@react-navigation/native";
-
 function AuthContent({ isLogin, onAuthenticate }) {
+  const { signup, error } = useSignup();
   const navigation = useNavigation();
   const [credentialsInvalid, setCredentialsInvalid] = useState({
     email: false,
@@ -48,6 +48,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
       });
       return;
     }
+
     onAuthenticate({ email, password });
   }
 
